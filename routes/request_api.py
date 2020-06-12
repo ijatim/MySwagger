@@ -3,7 +3,6 @@ import uuid
 from datetime import datetime, timedelta
 from flask import jsonify, abort, request, Blueprint
 
-from validate_email import validate_email
 
 REQUEST_API = Blueprint('request_api', __name__)
 
@@ -64,8 +63,6 @@ def create_record():
 
     if not data.get('email'):
         abort(400)
-    if not validate_email(data['email']):
-        abort(400)
     if not data.get('title'):
         abort(400)
 
@@ -97,8 +94,6 @@ def edit_record(_id):
     data = request.get_json(force=True)
 
     if not data.get('email'):
-        abort(400)
-    if not validate_email(data['email']):
         abort(400)
     if not data.get('title'):
         abort(400)
