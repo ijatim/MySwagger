@@ -7,19 +7,21 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route('/static/<path:path>')
-def send_statis(path):
+@app.route('/swagger_data/<path:path>')
+def send_swagger(path):
+    print('Okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+    print(send_from_directory('static', path))
     return send_from_directory('static', path)
 
 
 SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.json'
+API_URL = '/swagger_data/user.json'
 
 swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
     config={
-        'app_name': "flask_swagger"
+        'app_name': "flask_swagger_hamed"
     },
 )
 
@@ -34,4 +36,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
